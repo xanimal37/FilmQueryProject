@@ -16,9 +16,9 @@ public class FilmQueryApp {
 	public static void main(String[] args) {
 		FilmQueryApp app = new FilmQueryApp();
 
-		app.test();
+		//app.test();
 
-		// app.launch();
+		app.launch();
 	}
 
 	private void test() {
@@ -60,6 +60,7 @@ public class FilmQueryApp {
 		startUserInterface(input);
 
 		input.close();
+		System.out.println("APP ended.");
 	}
 
 	private void startUserInterface(Scanner input) {
@@ -78,6 +79,21 @@ public class FilmQueryApp {
 				//or else endless loop!
 				input.nextLine();	
 				}
+			
+			//process option
+			switch(choice) {
+			case 1:
+				System.out.println("ID LOOKUP");
+				break;
+			case 2:
+				System.out.println("KEYWORD LOOCKUP");
+				break;
+			case 3:
+				System.out.println("GOODBYE");
+				inMainMenu = false;
+				break;
+				
+			}
 		}
 
 	}

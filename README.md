@@ -1,8 +1,7 @@
 # Film Query App
 
 ## Description
-
-How to run:
+This app allows a user to query a database of imaginary films by either ID or keyword. The app will return various results depending on input. The program continues to expect user input until the user chooses to exit.
 
 ## Technologies Used
 - Java, Eclipse IDE
@@ -14,4 +13,4 @@ How to run:
 
 ## Bugs
 
-## To do...# FilmQueryProject
+## To do...
