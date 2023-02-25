@@ -10,6 +10,8 @@ This app allows a user to query a database of imaginary films by either ID or ke
 - git/github
 
 ## Lessons Learned
+- use @Override
+- remember to do null checks before trying to do things with objects!
 
 ## Bugs
 

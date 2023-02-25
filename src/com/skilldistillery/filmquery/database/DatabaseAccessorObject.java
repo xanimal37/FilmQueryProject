@@ -84,10 +84,12 @@ public class DatabaseAccessorObject implements DatabaseAccessor {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		
-		List<Actor> actors = findActorsByFilmId(filmId);
-		film.setActors(actors);
 
+		// if a film is found add a list of the actors
+		if (film != null) {
+			List<Actor> actors = findActorsByFilmId(filmId);
+			film.setActors(actors);
+		}
 		return film;
 	}
 
@@ -96,8 +98,7 @@ public class DatabaseAccessorObject implements DatabaseAccessor {
 		List<Actor> actors = new ArrayList<>();
 		String sql = "SELECT actor.id, actor.first_name, actor.last_name "
 				+ "FROM actor JOIN film_actor ON actor.id = film_actor.actor_id "
-				+ "JOIN film ON film_actor.film_id = film.id "
-				+ "WHERE film.id = ?";
+				+ "JOIN film ON film_actor.film_id = film.id " + "WHERE film.id = ?";
 		try {
 			Connection conn = DriverManager.getConnection(URL, user, pw);
 			PreparedStatement stmt = conn.prepareStatement(sql);

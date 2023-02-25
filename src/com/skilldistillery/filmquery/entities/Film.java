@@ -133,10 +133,7 @@ public class Film {
 	//overrides
 	@Override
 	public String toString() {
-		return getId() + " | " + getTitle() + " | " + getDescription() + " | " + getReleaseYear()
-		+ " | " + getLanguageId() + " | " + getRentalDuration() + " | " + getRentalRate() + " | " +
-				getLength() + " | " + getReplacementCost() + " | " + getRating() + " | " +
-		getFeatures();
+		return getTitle() + " | " + getReleaseYear() + " | " + getRating() + " | " + getDescription();
 	}
 	
 	

@@ -1,7 +1,7 @@
 package com.skilldistillery.filmquery.app;
 
+import java.sql.SQLException;
 import java.util.InputMismatchException;
-import java.util.List;
 import java.util.Scanner;
 
 import com.skilldistillery.filmquery.database.DatabaseAccessor;
@@ -16,7 +16,7 @@ public class FilmQueryApp {
 	public static void main(String[] args) {
 		FilmQueryApp app = new FilmQueryApp();
 
-		//app.test();
+		// app.test();
 
 		app.launch();
 	}
@@ -26,7 +26,7 @@ public class FilmQueryApp {
 		try {
 			Film film = db.findFilmById(1);
 			System.out.println(film);
-			for(Actor a : film.getActors()) {
+			for (Actor a : film.getActors()) {
 				System.out.println(a);
 			}
 		} catch (Exception e) {
@@ -41,7 +41,7 @@ public class FilmQueryApp {
 //			e.printStackTrace();
 //		}
 //		
-		//test for list of actors by film id
+		// test for list of actors by film id
 //		try {
 //			List<Actor> actors = db.findActorsByFilmId(1);
 //			for(Actor a : actors) {
@@ -58,6 +58,7 @@ public class FilmQueryApp {
 		Scanner input = new Scanner(System.in);
 
 		startUserInterface(input);
+		//runs main loop
 
 		input.close();
 		System.out.println("APP ended.");
@@ -65,39 +66,39 @@ public class FilmQueryApp {
 
 	private void startUserInterface(Scanner input) {
 		boolean inMainMenu = true;
-		while(inMainMenu) {
+		while (inMainMenu) {
 			showMainMenu();
-			//input
+			// input
 			int choice = 0;
 			try {
 				choice = input.nextInt();
 			} catch (InputMismatchException e) {
 				System.out.println("Please enter an integer value.");
+			} finally {
+				// clear SCANNER!!!
+				// or else endless loop!
+				input.nextLine();
 			}
-			finally {
-				//clear SCANNER!!!
-				//or else endless loop!
-				input.nextLine();	
-				}
-			
-			//process option
-			switch(choice) {
+
+			// process option
+			switch (choice) {
 			case 1:
-				System.out.println("ID LOOKUP");
+				lookupFilmById(input);
 				break;
 			case 2:
-				System.out.println("KEYWORD LOOCKUP");
+				lookupFilmByKeyword(input);
 				break;
 			case 3:
 				System.out.println("GOODBYE");
 				inMainMenu = false;
 				break;
-				
+			default:
+				break;
 			}
 		}
 
 	}
-	
+
 	private void showMainMenu() {
 		System.out.println("1. Look up film my ID number");
 		System.out.println("2. Look up a film by a keyword");
@@ -105,6 +106,37 @@ public class FilmQueryApp {
 		System.out.println("What would you like to do?");
 	}
 
+	private void lookupFilmById(Scanner input) {
+		System.out.println("ID LOOKUP");
+		System.out.println("Please enter an ID: ");
+		int id = 0;
+		try {
+			id = input.nextInt();
+			Film film = db.findFilmById(id);
+			if(film == null) {
+				System.out.println("Sorry, did not find a film with that ID number.");
+			}
+			else {
+				System.out.println("Found film for ID: " + id);
+				System.out.println(film);
+			}
+		}
+		catch (InputMismatchException e) {
+			System.out.println("Please enter a valid ID. Returning to main menu.");
+		}
+		catch (SQLException e) {
+			System.out.println("Sorry, there was a problem searching the database.");
+		}
+		finally {
+			//clear scanner
+			input.nextLine();
+		}
+		
+		
+	}
+
+	private void lookupFilmByKeyword(Scanner input) {
+		System.out.println("KEYWORD LOOCKUP");
+	}
+
 }
-
-
