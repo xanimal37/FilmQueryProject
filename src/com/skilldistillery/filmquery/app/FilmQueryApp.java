@@ -22,44 +22,12 @@ public class FilmQueryApp {
 		app.launch();
 	}
 
-	private void test() {
-		// test for retrieving a film
-		try {
-			Film film = db.findFilmById(1);
-			System.out.println(film);
-			for (Actor a : film.getActors()) {
-				System.out.println(a);
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-
-		// test for retrieving an actor
-//		try {
-//			Actor anActor = db.findActorById(2);
-//			System.out.println(anActor);
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//		}
-//		
-		// test for list of actors by film id
-//		try {
-//			List<Actor> actors = db.findActorsByFilmId(1);
-//			for(Actor a : actors) {
-//				System.out.println(a);
-//			}
-//		}
-//		catch (Exception e) {
-//			e.printStackTrace();
-//		}
-	}
-
 	private void launch() {
 		System.out.println("APP started.");
 		Scanner input = new Scanner(System.in);
 
 		startUserInterface(input);
-		//runs main loop
+		// runs main loop
 
 		input.close();
 		System.out.println("APP ended.");
@@ -114,26 +82,21 @@ public class FilmQueryApp {
 		try {
 			id = input.nextInt();
 			Film film = db.findFilmById(id);
-			if(film == null) {
+			if (film == null) {
 				System.out.println("Sorry, did not find a film with that ID number.");
-			}
-			else {
+			} else {
 				System.out.println("Found film for ID: " + id);
 				System.out.println(film);
 			}
-		}
-		catch (InputMismatchException e) {
+		} catch (InputMismatchException e) {
 			System.out.println("Please enter a valid ID. Returning to main menu.");
-		}
-		catch (SQLException e) {
+		} catch (SQLException e) {
 			System.out.println("Sorry, there was a problem searching the database.");
-		}
-		finally {
-			//clear scanner
+		} finally {
+			// clear scanner
 			input.nextLine();
 		}
-		
-		
+
 	}
 
 	private void lookupFilmByKeyword(Scanner input) {
@@ -142,24 +105,53 @@ public class FilmQueryApp {
 		try {
 			searchTerm = input.nextLine();
 			List<Film> films = db.findFilmsByKeyword(searchTerm);
-			if(films.size() == 0) {
+			if (films.size() == 0) {
 				System.out.println("Sorry, did not find any films with that keyword.");
-			}
-			else {
-				System.out.println("Found " + films.size() + " films with " + searchTerm + " in the title or description.");
-				for(Film film : films) {
+			} else {
+				System.out.println(
+						"Found " + films.size() + " films with " + searchTerm + " in the title or description.");
+				for (Film film : films) {
 					System.out.println(film);
 				}
 			}
-		}
-		catch (InputMismatchException e) {
+		} catch (InputMismatchException e) {
 			System.out.println("Please enter a valid keyword. Returning to main menu.");
-		}
-		catch (SQLException e) {
+		} catch (SQLException e) {
 			System.out.println("Sorry, there was a problem searching the database.");
 		}
-		
-		
+
+	}
+
+	// ***************************** TESTING ONLY **********************************
+	private void test() {
+		// test for retrieving a film
+		try {
+			Film film = db.findFilmById(1);
+			System.out.println(film);
+			for (Actor a : film.getActors()) {
+				System.out.println(a);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		// test for retrieving an actor
+		try {
+			Actor anActor = db.findActorById(2);
+			System.out.println(anActor);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		// test for list of actors by film id
+		try {
+			List<Actor> actors = db.findActorsByFilmId(1);
+			for (Actor a : actors) {
+				System.out.println(a);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 }

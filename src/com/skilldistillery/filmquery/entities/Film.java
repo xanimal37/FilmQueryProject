@@ -16,13 +16,15 @@ public class Film {
 	private double rentalRate;
 	private String rating;
 	private String features;
+	private String language;
 	private List<Actor> actors;
 	
 	//constructors
 	public Film() {}
 	
 	public Film(int id, String title, String description, int releaseYear, int languageId, Integer length,
-			double replacementCost, int rentalDuration, String rating, String features, double rentalRate) {
+			double replacementCost, int rentalDuration, String rating, String features, double rentalRate,
+			String language) {
 		super();
 		this.id = id;
 		this.title = title;
@@ -35,6 +37,7 @@ public class Film {
 		this.rating = rating;
 		this.features = features;
 		this.rentalRate = rentalRate;
+		this.language = language;
 	}
 
 	//getters and setters
@@ -129,11 +132,19 @@ public class Film {
 		//return a copy
 		return new ArrayList<Actor>(actors);
 	}
+	
+	public void setLanguage(String language) {
+		this.language = language;
+	}
+	
+	public String getLanguage() {
+		return language;
+	}
 
 	//overrides
 	@Override
 	public String toString() {
-		return getTitle() + " | " + getReleaseYear() + " | " + getRating() + " | " + getDescription();
+		return getTitle() + " | " + getReleaseYear() + " | " + getRating() + " | " + getDescription() + " | " + getLanguage();
 	}
 	
 	
