@@ -2,6 +2,7 @@ package com.skilldistillery.filmquery.app;
 
 import java.sql.SQLException;
 import java.util.InputMismatchException;
+import java.util.List;
 import java.util.Scanner;
 
 import com.skilldistillery.filmquery.database.DatabaseAccessor;
@@ -107,7 +108,7 @@ public class FilmQueryApp {
 	}
 
 	private void lookupFilmById(Scanner input) {
-		System.out.println("ID LOOKUP");
+		System.out.println("ID LOOKUP ---------------");
 		System.out.println("Please enter an ID: ");
 		int id = 0;
 		try {
@@ -136,7 +137,29 @@ public class FilmQueryApp {
 	}
 
 	private void lookupFilmByKeyword(Scanner input) {
-		System.out.println("KEYWORD LOOCKUP");
+		System.out.println("KEYWORD LOOKUP --------------");
+		String searchTerm = "";
+		try {
+			searchTerm = input.nextLine();
+			List<Film> films = db.findFilmsByKeyword(searchTerm);
+			if(films.size() == 0) {
+				System.out.println("Sorry, did not find any films with that keyword.");
+			}
+			else {
+				System.out.println("Found " + films.size() + " films with " + searchTerm + " in the title or description.");
+				for(Film film : films) {
+					System.out.println(film);
+				}
+			}
+		}
+		catch (InputMismatchException e) {
+			System.out.println("Please enter a valid keyword. Returning to main menu.");
+		}
+		catch (SQLException e) {
+			System.out.println("Sorry, there was a problem searching the database.");
+		}
+		
+		
 	}
 
 }
