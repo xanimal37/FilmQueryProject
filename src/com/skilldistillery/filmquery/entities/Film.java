@@ -4,13 +4,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Film {
-	
+
 	private int id;
 	private String title;
 	private String description;
 	private Integer releaseYear;
 	private int languageId;
-	private Integer length; //might be null
+	private Integer length; // might be null
 	private double replacementCost;
 	private int rentalDuration;
 	private double rentalRate;
@@ -18,10 +18,11 @@ public class Film {
 	private String features;
 	private String language;
 	private List<Actor> actors;
-	
-	//constructors
-	public Film() {}
-	
+
+	// constructors
+	public Film() {
+	}
+
 	public Film(int id, String title, String description, int releaseYear, int languageId, Integer length,
 			double replacementCost, int rentalDuration, String rating, String features, double rentalRate,
 			String language) {
@@ -40,26 +41,31 @@ public class Film {
 		this.language = language;
 	}
 
-	//getters and setters
+	// getters and setters
 	public int getId() {
 		return id;
 	}
+
 	public void setId(int id) {
 		this.id = id;
 	}
+
 	public String getTitle() {
 		return title;
 	}
+
 	public void setTitle(String title) {
 		this.title = title;
 	}
+
 	public String getDescription() {
 		return description;
 	}
+
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	
+
 	public int getReleaseYear() {
 		return releaseYear;
 	}
@@ -115,38 +121,51 @@ public class Film {
 	public void setFeatures(String features) {
 		this.features = features;
 	}
-	
+
 	public double getRentalRate() {
 		return rentalRate;
 	}
-	
+
 	public void setRentalRate(double rentalRate) {
 		this.rentalRate = rentalRate;
 	}
-	
+
 	public void setActors(List<Actor> actors) {
 		this.actors = actors;
 	}
-	
-	public List<Actor> getActors(){
-		//return a copy
+
+	public List<Actor> getActors() {
+		// return a copy
 		return new ArrayList<Actor>(actors);
 	}
-	
+
 	public void setLanguage(String language) {
 		this.language = language;
 	}
-	
+
 	public String getLanguage() {
 		return language;
 	}
 
-	//overrides
+	// overrides
+	// User story 5
 	@Override
 	public String toString() {
-		return getTitle() + " | " + getReleaseYear() + " | " + getRating() + " | " + getDescription() + " | " + getLanguage();
+		StringBuilder filmStr = new StringBuilder();
+		filmStr.append(getTitle() + " | ");
+		filmStr.append(getReleaseYear() + " | ");
+		filmStr.append(getRating() + " | ");
+		filmStr.append(getDescription() + " | ");
+		filmStr.append(getLanguage() + " | ");
+
+		// now add the list of actors
+		filmStr.append("\n*** Starring: ***\n");
+
+			for (Actor actor : actors) {
+				filmStr.append(actor + "\n");
+			}
+
+		return filmStr.toString();
 	}
-	
-	
-	
+
 }

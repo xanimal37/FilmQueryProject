@@ -168,6 +168,12 @@ public class DatabaseAccessorObject implements DatabaseAccessor {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+		// for each film add the actors
+		for(Film film : films) {
+			List<Actor> actors = findActorsByFilmId(film.getId());
+			film.setActors(actors);
+		}
+				
 		return films;
 	}
 
