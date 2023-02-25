@@ -13,6 +13,5 @@ This app allows a user to query a database of imaginary films by either ID or ke
 - use @Override
 - remember to do null checks before trying to do things with objects!
 
-## Bugs
-
 ## To do...
+- right now the actor list is generated with a separate query. Should this be all one query?
